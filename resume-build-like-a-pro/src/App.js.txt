@@ -1,0 +1,48 @@
+import React, { useState } from "react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import ResumeForm from "./components/ResumeForm";
+import ResumePreview from "./components/ResumePreview";
+
+function App() {
+  const [page, setPage] = useState("welcome");
+  const [formData, setFormData] = useState({});
+  const [layout, setLayout] = useState("Professional");
+  const [theme, setTheme] = useState("Blue");
+
+  return (
+    <div className={`min-h-screen ${theme === "Blue" ? "bg-blue-100" : theme === "Beige" ? "bg-yellow-50" : "bg-gray-200"}`}>
+      <Header />
+      {page === "welcome" && (
+        <div className="flex flex-col items-center justify-center h-[70vh]">
+          <h1 className="text-4xl font-bold mb-5">Welcome to Resume Builder Pro</h1>
+          <button className="px-6 py-3 bg-blue-500 text-white rounded" onClick={() => setPage("form")}>
+            Start Building
+          </button>
+        </div>
+      )}
+      {page === "form" && (
+        <ResumeForm
+          formData={formData}
+          setFormData={setFormData}
+          layout={layout}
+          setLayout={setLayout}
+          theme={theme}
+          setTheme={setTheme}
+          goToPreview={() => setPage("preview")}
+        />
+      )}
+      {page === "preview" && (
+        <ResumePreview
+          formData={formData}
+          layout={layout}
+          theme={theme}
+          goToEdit={() => setPage("form")}
+        />
+      )}
+      <Footer />
+    </div>
+  );
+}
+
+export default App;

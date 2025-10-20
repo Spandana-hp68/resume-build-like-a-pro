@@ -1,0 +1,22 @@
+import React from "react";
+
+function LayoutSelector({ layout, setLayout }) {
+  const layouts = ["Professional", "Modern", "Casual"];
+
+  return (
+    <div className="mb-4">
+      <label className="block mb-2 font-semibold">Select Layout:</label>
+      <select
+        value={layout}
+        onChange={(e) => setLayout(e.target.value)}
+        className="border rounded px-3 py-2"
+      >
+        {layouts.map((l) => (
+          <option key={l} value={l}>{l}</option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
+export default LayoutSelector;
